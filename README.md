@@ -161,3 +161,7 @@ Supersedes the pale orange header rule: product box/table headers use the exact 
 ## 2026-11-02: shared horizontal frame
 
 CV, Work, Valuation and navigation/footer share max1280 border-box, horizontal inset24 desktop/16 mobile. CV spacious density does not change the common horizontal frame.
+
+## Current 0xhieu.xyz tone — user decision 2026-11-04
+
+Supersedes every earlier orange/blue/cream rule above for this product. White-grey-black: white page and card bodies, mist `#ECF0F8` table/box headers and popups, black text, grey secondary text. Orange `#FFA111` only on buttons, selected controls and highlights (accent text weight 600; black text on orange fills). Button hover is black with white text; input focus is black. Earth orange `#B84A0C` and cream `#FEF5D9` are banned on this product; the global palette for other products is unchanged. Red stays semantic danger only.
