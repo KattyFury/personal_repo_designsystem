@@ -165,3 +165,7 @@ CV, Work, Valuation and navigation/footer share max1280 border-box, horizontal i
 ## Current 0xhieu.xyz tone — user decision 2026-11-04
 
 Supersedes every earlier orange/blue/cream rule above for this product. White-grey-black: white page and card bodies, mist `#ECF0F8` table/box headers and popups, black text, grey secondary text. Orange `#FFA111` only on buttons, selected controls and highlights (accent text weight 600; black text on orange fills). Button hover is black with white text; input focus is black. Earth orange `#B84A0C` and cream `#FEF5D9` are banned on this product; the global palette for other products is unchanged. Red stays semantic danger only.
+
+## 0xhieu.xyz DAILY and rank label — user decision 2026-11-04
+
+Supersedes earlier DAILY rules: DAILY stands out through a mist section surface, without an orange border. Task text is black weight 400 at rest and weight 600 on hover, the same as every clickable item. The Work-to-Earn position in the rank bar is labelled `w2e`, because `$` looked like `S`.
