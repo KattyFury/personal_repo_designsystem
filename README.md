@@ -169,3 +169,7 @@ Supersedes every earlier orange/blue/cream rule above for this product. White-gr
 ## 0xhieu.xyz DAILY and rank label — user decision 2026-11-04
 
 Supersedes earlier DAILY rules: DAILY stands out through a mist section surface, without an orange border. Task text is black weight 400 at rest and weight 600 on hover, the same as every clickable item. The Work-to-Earn position in the rank bar is labelled `w2e`, because `$` looked like `S`.
+
+## 0xhieu.xyz neutral surface, marker highlight and Work tags — user decision 2026-11-06
+
+Supersedes the mist and orange-text rules above for this product. Headers, popups and DAILY use the product token `--ds-color-surface` `#E5E5E5` (neutral, slightly darker than mist); the global `mist` for other products is unchanged. Highlighted text is a marker: black text weight 600 on an `#FFA111` fill, never orange text on white. Work header tags: rank w2e/S, high-potential and narratives in the Valuation Trending Narratives top 4 are black fill with white text; rank A/B/C, low-potential and other narratives are white with a line border and black text. Red stays for danger only.
