@@ -23,6 +23,21 @@ Trong HTML: `<body data-ds-product="0xhieu-xyz" data-ds-profile="compact">`. The
 
 Nguồn: giao diện 0xhieu.xyz được duyệt 07/11/2026. Token đầy đủ nằm ở `tokens.json → bento`, CSS ở `web.css` (`--ds-bento-*`).
 
+**Figma:** https://www.figma.com/design/V0GuQUwipow6yFqNi4y7qg/hieu
+- Biến: `Primitives`, `Bento` (Light/Dark), `Spacing & Radius`.
+- 24 text style theo chức năng (`Mobile/…` và `Desktop/…`).
+- Component Bento.
+- Page **Icons**: 328 icon Lucide 1.59.0, dùng chung cho mọi sản phẩm.
+
+### Bảng màu mở rộng
+
+Có 16 họ màu × 11 sắc độ (50–950), cộng thêm neutral 0–1000, dùng tự do khi thiết kế:
+- **Họ màu:** slate, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, purple, pink, brown.
+- **Cách tạo:** 500 là màu gốc; sắc độ nhạt pha dần về trắng, sắc độ đậm pha dần về gần đen.
+- **Trong code:** `--ds-palette-<họ>-<sắc độ>`, ví dụ `--ds-palette-teal-500`.
+- **Trong Figma:** collection `Primitives`.
+- Giao diện chuẩn vẫn ưu tiên màu ngữ nghĩa Bento. Bảng màu mở rộng dùng cho minh hoạ, biểu đồ, nhãn phân loại và sản phẩm mới.
+
 ### Bề mặt
 
 | Thứ | Giá trị | Dùng cho |

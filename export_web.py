@@ -36,6 +36,11 @@ for key,name in [('cardRadius','card-radius'),('controlRadius','control-radius')
  out.append('  --ds-product-'+name+': '+str(p['sharedComponents'][key])+'px;')
 out.append('}')
 out += ['@media (max-width: 640px) {','  [data-ds-profile] { --ds-page-gutter: 16px; }','  [data-ds-profile="spacious"] { --ds-section-gap: 32px; --ds-panel-padding: 16px; --ds-panel-gap: 16px; }','  [data-ds-product="0xhieu-xyz"] { --ds-val-header-font-size: '+str(v['headerFontMobile'])+'px; --ds-val-header-line-height: '+str(v['headerLineMobile'])+'px; --ds-val-panel-gap: '+str(v['panelGapMobile'])+'px; --ds-cv-hero-top: '+str(cv['heroPaddingTopMobile'])+'px; --ds-cv-section-gap: '+str(cv['sectionGapMobile'])+'px; --ds-cv-portrait: '+str(cv['portraitMobile'])+'px; }','}']
+# Bảng màu mở rộng: --ds-palette-<hue>-<step>
+out.append(':root {')
+for hue,ramp in t['palette']['ramps'].items():
+ for step,hexv in ramp.items(): out.append('  --ds-palette-'+hue+'-'+step+': '+hexv+';')
+out.append('}')
 # Bento v4: bề mặt, bo góc, cỡ chữ theo thiết bị, spacing theo profile (data / spacious)
 b=t['bento'];sf=b['surfaces'];r=b['radius']
 out += [':root {','  --ds-bento-canvas: '+sf['canvas']['value']+';','  --ds-bento-tile: '+sf['tile']['value']+';','  --ds-bento-hair: '+sf['hair']['value']+';','  --ds-bento-dark-tile: '+sf['darkTile']['value']+';','  --ds-bento-radius-tile: '+str(r['tile'])+'px;','  --ds-bento-radius-inner: '+str(r['inner'])+'px;','  --ds-bento-radius-pill: '+str(r['pill'])+'px;','  --ds-bento-gutter: '+str(b['layout']['pageGutter']['desktop'])+'px;']
