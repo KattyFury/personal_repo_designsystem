@@ -44,25 +44,35 @@ Nguồn: giao diện 0xhieu.xyz được duyệt 07/11/2026. Token đầy đủ 
 - **Bóng:** chỉ đồ vật **nổi** có `shadow-y2`: navbar dính, nút toolbar trang, nút nổi, popup. Tile và link/nút nằm trong tile thì phẳng.
 - **Độ đậm chữ chỉ 3 mức:**
   - **400** cho chữ đọc.
-  - **600** cho nhãn, tên, nút.
-  - **800** cho tiêu đề và số lớn.
-  - Không dùng 500 hay 700.
+  - **600** cho nhãn, tên, nút, tiêu đề tile.
+  - **700** cho tiêu đề trang và số lớn.
+  - Không dùng 500 hay 800.
 
-### Cỡ chữ — ít cỡ, không loạn
+### Kiểu chữ — đặt tên theo chức năng
 
-Chỉ dùng đúng các vai trò dưới đây. **Cấm** chế cỡ lẻ (13, 15, 17…) để nhét cho vừa. Không vừa thì rút gọn, xuống dòng hoặc ẩn bớt yếu tố. Chữ dữ liệu không bao giờ dưới 14.
+Mỗi chữ trên giao diện thuộc **đúng một kiểu theo chức năng**. Code chỉ gọi theo tên, qua biến CSS `--ds-type-<tên>-size`, `-line`, `-weight`, `-tracking`; không gõ cỡ px tay. Mỗi kiểu có cỡ riêng cho mobile và desktop, và biến CSS tự đổi khi màn ≤640.
 
-| Vai trò | Mobile (≤640) | Desktop | Weight | Dùng cho |
-|---|---|---|---|---|
-| `bento-small` | 14/20 | 14/20 | 400 · 600 | Metadata, thẻ, chip, ô và tiêu đề bảng, chú thích |
-| `bento-body` | 16/24 | 16/24 | 400 · 600 | Chữ hàng/task, đoạn văn, input (16 để iPhone không tự zoom), nút, menu |
-| `bento-title` | 20/28 | 20/28 | 800 | Tiêu đề tile, tiêu đề dropdown, tiêu đề mục CV |
-| `bento-page` | 20/28 | 28/36 | 800 | Một tiêu đề trang mỗi màn |
-| `bento-display` | 32/36 | 48/52 | 800 | Số lớn trong tile accent/tối, tên trên CV. Tối đa 2 chỗ mỗi màn |
-| `bento-hero` | 40/44 | 64/68 | 800 | **Chỉ trang spacious**, một dòng mỗi trang |
+- **Mobile nhỏ và thoáng:** đọc rõ nhưng không to, không hét.
+- **Desktop to:** đủ để chụp màn hình dùng làm banner, ảnh bìa, slide.
 
-- **Mobile dùng 4 cỡ:** 14 · 16 · 20 · 32. Trang spacious thêm cỡ 40 cho hero.
-- **Desktop dùng 5 cỡ:** 14 · 16 · 20 · 28 · 48. Trang spacious thêm cỡ 64 cho hero.
+| Kiểu | Tên trong code | Mobile | Desktop | Weight | Dùng cho |
+|---|---|---|---|---|---|
+| **Tiêu đề lớn** | `display` | 28/32 | 56/60 | 700 | Big numbers in accent/dark tiles, CV tagline, checklist counts. Max 2 per screen. |
+| **Tiêu đề trang** | `page` | 20/26 | 32/40 | 700 | One page title per screen. |
+| **Header** | `header` | 16/22 | 20/28 | 600 | Titles of tiles, boxes, dropdowns, popups; person name; job role. |
+| **Nội dung** | `content` | 14/20 | 16/24 | 400 | Main reading text: task/row text, paragraphs, list items. Names in a row use weight 600. |
+| **Nội dung phụ** | `secondary` | 13/18 | 14/20 | 400 | Supporting text under content: row meta, location, stat caption, sub-lines. Grey. |
+| **Số liệu** | `data` | 13/18 | 14/20 | 400 | Table cells and numeric values in lists. tabular-nums. |
+| **Nhãn** | `label` | 12/16 | 13/18 | 600 | Tags, chips, table headers, group labels, small box labels, counters. |
+| **Nút** | `button` | 14/20 | 15/20 | 600 | Buttons, nav tabs, toggles, link chips. |
+| **Ghi chú** | `note` | 12/16 | 13/18 | 400 | Captions, hints, helper/error text, empty states, footnotes. |
+| **Ô nhập** | `input` | 16/24 | 16/24 | 400 | Form inputs and selects (16 on mobile prevents iOS zoom). |
+| **Hero** | `hero` | 32/36 | 72/76 | 700 | Spacious pages only (landing, cover): one line per page. |
+
+**Quy tắc:**
+- **Độ đậm chỉ 400 · 600 · 700.** Không dùng 800 vì nhìn kém sang.
+- Tên dự án hoặc tên trong hàng dùng **Nội dung** đậm 600, không tạo cỡ mới.
+- Chưa có kiểu nào hợp với một chữ mới thì **thêm kiểu mới vào bảng này**, đặt tên theo chức năng. Không gõ cỡ px tay.
 - Mọi con số dùng `tabular-nums`.
 
 ### Bố cục chung
@@ -84,7 +94,7 @@ Gồm Valuation, Work, dashboard, admin, tracker, screener.
 | Khe giữa các khối | 12 | 12 |
 | Đệm trong tile | 20 | 16 |
 | Hàng tối thiểu | 40 | 44 (vùng chạm) |
-| Đệm dọc hàng | 10 | 10 |
+| Đệm dọc hàng | 12 | 12 |
 
 - **Một khe 12 cho mọi thứ**, để cả trang đọc như một bảng liền.
 - Hàng trong tile ngăn bằng đường hair. **Không đặt card trong card.**
@@ -150,12 +160,12 @@ Gồm CV, portfolio, landing, marketing, giới thiệu.
 ### Kiểm tra trước khi giao
 
 1. **Đếm cỡ chữ** trên trang:
-   - Mobile chỉ dùng {14, 16, 20, 32}, cộng 40 nếu là trang spacious.
-   - Desktop chỉ dùng {14, 16, 20, 28, 48}, cộng 64 nếu là trang spacious.
+   - Mọi chữ đều thuộc một kiểu trong bảng **Kiểu chữ**.
+   - Trong CSS không còn `font-size` gõ số px tay.
 2. **Đếm bo góc:** chỉ có 20, 10 và pill.
 3. **Ở khổ 390, 360 và 320:**
    - Không có gì phải kéo ngang.
-   - Không chữ nào dưới 14.
+   - Không chữ nào dưới 12.
 4. **Màu tile:** mỗi màn tối đa 1 tile accent và 1 tile tối.
 5. **Chụp ảnh thật** để xem, không chỉ dựa vào lint.
 

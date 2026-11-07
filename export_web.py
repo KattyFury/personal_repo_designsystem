@@ -40,7 +40,7 @@ out += ['@media (max-width: 640px) {','  [data-ds-profile] { --ds-page-gutter: 1
 b=t['bento'];sf=b['surfaces'];r=b['radius']
 out += [':root {','  --ds-bento-canvas: '+sf['canvas']['value']+';','  --ds-bento-tile: '+sf['tile']['value']+';','  --ds-bento-hair: '+sf['hair']['value']+';','  --ds-bento-dark-tile: '+sf['darkTile']['value']+';','  --ds-bento-radius-tile: '+str(r['tile'])+'px;','  --ds-bento-radius-inner: '+str(r['inner'])+'px;','  --ds-bento-radius-pill: '+str(r['pill'])+'px;','  --ds-bento-gutter: '+str(b['layout']['pageGutter']['desktop'])+'px;']
 for x in b['type']['styles']:
- out += ['  --ds-'+x['name']+'-size: '+str(x['desktop'][0])+'px;','  --ds-'+x['name']+'-line: '+str(x['desktop'][1])+'px;','  --ds-'+x['name']+'-weight: '+str(x['weight'])+';','  --ds-'+x['name']+'-tracking: '+x['tracking']+';']
+ out += ['  --ds-type-'+x['name']+'-size: '+str(x['desktop'][0])+'px;','  --ds-type-'+x['name']+'-line: '+str(x['desktop'][1])+'px;','  --ds-type-'+x['name']+'-weight: '+str(x['weight'])+';','  --ds-type-'+x['name']+'-tracking: '+x['tracking']+';']
 out.append('}')
 bp={'compact':b['profiles']['data'],'spacious':b['profiles']['spacious']}
 for name,pr in bp.items():
@@ -49,7 +49,7 @@ for name,pr in bp.items():
  if 'rowMinHeight' in pr:out.append('  --ds-bento-row-height: '+str(pr['rowMinHeight']['desktop'])+'px;')
  out.append('}')
 out.append('@media (max-width: '+str(b['type']['mobileMaxWidth'])+'px) {')
-out.append('  :root { --ds-bento-gutter: '+str(b['layout']['pageGutter']['mobile'])+'px; '+' '.join('--ds-'+x['name']+'-size: '+str(x['mobile'][0])+'px; --ds-'+x['name']+'-line: '+str(x['mobile'][1])+'px;' for x in b['type']['styles'])+' }')
+out.append('  :root { --ds-bento-gutter: '+str(b['layout']['pageGutter']['mobile'])+'px; '+' '.join('--ds-type-'+x['name']+'-size: '+str(x['mobile'][0])+'px; --ds-type-'+x['name']+'-line: '+str(x['mobile'][1])+'px;' for x in b['type']['styles'])+' }')
 for name,pr in bp.items():
  extra=' --ds-bento-row-height: '+str(pr['rowMinHeight']['mobile'])+'px;' if 'rowMinHeight' in pr else ''
  out.append('  [data-ds-profile="'+name+'"] { --ds-bento-tile-gap: '+str(pr['tileGap']['mobile'])+'px; --ds-bento-section-gap: '+str(pr['sectionGap']['mobile'])+'px; --ds-bento-tile-padding: '+str(pr['tilePadding']['mobile'])+'px;'+extra+' }')
