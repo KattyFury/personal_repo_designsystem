@@ -28,6 +28,7 @@ Nguồn: giao diện 0xhieu.xyz được duyệt 07/11/2026. Token đầy đủ 
 - 24 text style theo chức năng (`Mobile/…` và `Desktop/…`).
 - Component Bento.
 - Page **Icons**: 328 icon Lucide 1.59.0, dùng chung cho mọi sản phẩm.
+- Nhóm **Brand** (`Brand/x`, `Brand/discord`, `Brand/telegram`, `Brand/github`): Lucide 1.x đã bỏ icon thương hiệu nên vẽ thêm, cùng nét stroke 2 như icon trên 0xhieu.xyz.
 
 ### Bảng màu mở rộng
 
