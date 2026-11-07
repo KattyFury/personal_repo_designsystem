@@ -1,6 +1,6 @@
-# nguyen0xhieu — Design System v3
+# nguyen0xhieu — Design System v4 (Bento)
 
-Nguồn chuẩn để thiết kế và code mọi sản phẩm của nguyen0xhieu. **Giữ bộ màu gốc**, dùng hai mật độ web theo mục đích và một tập component nhất quán. Cập nhật 2026-11-01.
+Nguồn chuẩn để thiết kế và code mọi sản phẩm của nguyen0xhieu. **Giữ bộ màu gốc**, dùng hai mật độ web theo mục đích và một tập component nhất quán. Cập nhật 2026-11-08: **v4 lấy Bento làm phong cách web mặc định** (mục ngay dưới). Các mục v3 phía sau vẫn đúng về màu, token và pattern dữ liệu, nhưng khi mâu thuẫn về bề mặt, bo góc, cỡ chữ, spacing thì **Bento thắng**.
 
 ## Dùng bộ này
 
@@ -18,6 +18,146 @@ Nguồn chuẩn để thiết kế và code mọi sản phẩm của nguyen0xhie
 | `README.md` | Quyết định thiết kế, cách chọn pattern và tiêu chí kiểm tra |
 
 Trong HTML: `<body data-ds-product="0xhieu-xyz" data-ds-profile="compact">`. Theme dùng `data-ds-theme="dark"` khi sản phẩm có hỗ trợ. Profile đổi theo trang, không đổi tùy tiện chỉ vì viewport nhỏ.
+
+## Bento v4 — phong cách web mặc định (chốt 2026-11-08)
+
+Nguồn: giao diện 0xhieu.xyz được duyệt 07/11/2026. Token đầy đủ nằm ở `tokens.json → bento`, CSS ở `web.css` (`--ds-bento-*`).
+
+### Bề mặt
+
+| Thứ | Giá trị | Dùng cho |
+|---|---|---|
+| Canvas | `#F2F2F0` | Nền trang. Tiêu đề trang và nhãn nhóm nằm thẳng trên canvas, **không** có dải nền trắng. |
+| Tile | `#FFFFFF` | Mọi nội dung đọc được nằm trong tile. Không viền, không bóng. |
+| Hair | `#ECECEA` | Đường kẻ 1px giữa các hàng trong tile. |
+| Tile tối | `#161616` | Ô tương phản (cảnh báo, khối quan trọng thứ hai). Chữ trắng, số dùng màu accent. |
+| Tile accent | màu accent sản phẩm | Số liệu/khối chính. Chữ đen; nút trong đó nền đen chữ accent. |
+| Chip | màu canvas | Thẻ, chip, ô icon, nút phụ bên trong tile trắng. |
+
+- Mỗi màn **tối đa 1 tile accent và 1 tile tối**; còn lại là tile trắng.
+- **Thẻ:** thẻ quan trọng nền đen chữ trắng/accent, thẻ thường nền canvas chữ đen. Không dùng thẻ viền.
+- **Trạng thái:** việc kế tiếp là chip accent, quá giờ/nguy hiểm là chip `red-soft` chữ `red-text`, việc xong là chữ muted gạch ngang. Màu trạng thái luôn đi kèm chữ.
+- **Bo góc chỉ 3 mức:**
+  - **20** cho tile và popup.
+  - **10** cho chip, thẻ, logo, ô icon, nút nhỏ, input.
+  - **Pill** cho navbar, tab, toggle, ô đếm, nút nổi, avatar.
+- **Bóng:** chỉ đồ vật **nổi** có `shadow-y2`: navbar dính, nút toolbar trang, nút nổi, popup. Tile và link/nút nằm trong tile thì phẳng.
+- **Độ đậm chữ chỉ 3 mức:**
+  - **400** cho chữ đọc.
+  - **600** cho nhãn, tên, nút.
+  - **800** cho tiêu đề và số lớn.
+  - Không dùng 500 hay 700.
+
+### Cỡ chữ — ít cỡ, không loạn
+
+Chỉ dùng đúng các vai trò dưới đây. **Cấm** chế cỡ lẻ (13, 15, 17…) để nhét cho vừa. Không vừa thì rút gọn, xuống dòng hoặc ẩn bớt yếu tố. Chữ dữ liệu không bao giờ dưới 14.
+
+| Vai trò | Mobile (≤640) | Desktop | Weight | Dùng cho |
+|---|---|---|---|---|
+| `bento-small` | 14/20 | 14/20 | 400 · 600 | Metadata, thẻ, chip, ô và tiêu đề bảng, chú thích |
+| `bento-body` | 16/24 | 16/24 | 400 · 600 | Chữ hàng/task, đoạn văn, input (16 để iPhone không tự zoom), nút, menu |
+| `bento-title` | 20/28 | 20/28 | 800 | Tiêu đề tile, tiêu đề dropdown, tiêu đề mục CV |
+| `bento-page` | 20/28 | 28/36 | 800 | Một tiêu đề trang mỗi màn |
+| `bento-display` | 32/36 | 48/52 | 800 | Số lớn trong tile accent/tối, tên trên CV. Tối đa 2 chỗ mỗi màn |
+| `bento-hero` | 40/44 | 64/68 | 800 | **Chỉ trang spacious**, một dòng mỗi trang |
+
+- **Mobile dùng 4 cỡ:** 14 · 16 · 20 · 32. Trang spacious thêm cỡ 40 cho hero.
+- **Desktop dùng 5 cỡ:** 14 · 16 · 20 · 28 · 48. Trang spacious thêm cỡ 64 cho hero.
+- Mọi con số dùng `tabular-nums`.
+
+### Bố cục chung
+
+- **Khung:** rộng tối đa 1280, lề ngang 24 trên desktop và 16 trên mobile.
+- **Navbar:** viên trắng nổi, dính trên đầu. Logo bên trái, cụm tab bên phải; tab đang mở nền accent, chữ đen.
+- **Đầu trang:** tiêu đề bên trái, nút điều khiển bên phải, đặt thẳng trên canvas. Nút điều khiển là viên trắng có bóng.
+- **Lưới:** desktop 4 cột, ≤1024 còn 2 cột, mobile 2 cột cho ô số liệu và ô tính năng.
+  - Danh sách, checklist và bảng chiếm trọn hàng.
+  - Ô mở rộng được (`details`) khi mở ra chiếm 2 cột, trên mobile chiếm cả hàng.
+
+### Trang dữ liệu — khít và sạch (`data-ds-profile="compact"`)
+
+Gồm Valuation, Work, dashboard, admin, tracker, screener.
+
+| | Desktop | Mobile |
+|---|---|---|
+| Khe giữa tile | 12 | 12 |
+| Khe giữa các khối | 12 | 12 |
+| Đệm trong tile | 20 | 16 |
+| Hàng tối thiểu | 40 | 44 (vùng chạm) |
+| Đệm dọc hàng | 10 | 10 |
+
+- **Một khe 12 cho mọi thứ**, để cả trang đọc như một bảng liền.
+- Hàng trong tile ngăn bằng đường hair. **Không đặt card trong card.**
+- **Bảng trên mobile không bao giờ kéo ngang.** Theo thứ tự:
+  1. Ẩn bớt cột phụ.
+  2. Rút gọn giá trị ghép, chỉ giữ số chính (ví dụ ATH chỉ còn `đỉnh (×N)`).
+  3. Không bao giờ thu nhỏ chữ.
+- **Danh sách tham khảo** (danh sách dự án, hướng dẫn) gom vào **một tile dropdown, mặc định gập**. Nội dung dùng hằng ngày thì để mở sẵn.
+- **Checklist:**
+  - Gồm một tile hero (ngày, số việc, vòng tiến độ) và ngay dưới là một tile danh sách trắng.
+  - Tick tự về 0 khi sang ngày hoặc tuần mới.
+  - Việc có giờ hẹn hiện trong ô "Lịch hôm nay".
+- **Toolbar** một hàng. Control nào hết công dụng thì **bỏ hẳn**, không để nổi lơ lửng.
+- Không dùng cỡ `bento-hero`.
+
+### Trang trình bày — có khoảng thở (`data-ds-profile="spacious"`)
+
+Gồm CV, portfolio, landing, marketing, giới thiệu.
+
+| | Desktop | Mobile |
+|---|---|---|
+| Khe giữa tile | 16 | 12 |
+| Khe giữa các mục | 48 | 32 |
+| Đệm trong tile | 32 | 20 |
+| Tile hero | chiếm 2/4 cột, cao tối thiểu 320, đệm 40 | đệm 24 |
+
+- Một hero mạnh duy nhất, đứng cạnh tile số liệu accent và tile liên hệ.
+- Các mục cách nhau bằng khe lớn; tile trong cùng một mục dùng khe tile.
+- Đoạn văn rộng tối đa 680.
+- Ảnh nằm trong tile riêng, có chú thích, không đè chữ lên ảnh.
+- Nút liên hệ là chip canvas phẳng.
+
+### Component mẫu
+
+- **Tile số liệu:**
+  - Nền accent hoặc nền tối.
+  - Nhãn nhỏ đậm 600 ở trên, số cỡ display ở giữa, chú thích nhỏ ở dưới.
+- **Tile danh sách:**
+  - Hàng tiêu đề gồm tiêu đề và ô đếm dạng pill nền canvas.
+  - Các hàng ngăn bằng đường hair.
+- **Tile dropdown:**
+  - Hàng tóm tắt gồm tiêu đề (`bento-title`), ô đếm và mũi tên.
+  - Mở ra là các nhóm hàng.
+- **Hàng:**
+  - Đầu hàng: logo hoặc ô check 36.
+  - Giữa: chữ chính (body) và dòng meta (small, xám).
+  - Cuối hàng: nút icon 32 nền canvas, bo 10.
+- **Checkbox:**
+  - Hình tròn 24, viền xám 2px.
+  - Khi tick: nền đen, dấu check trắng; chữ đổi sang muted và gạch ngang.
+- **Vòng tiến độ:**
+  - Cỡ 92 trên desktop, 80 trên mobile.
+  - Trên tile accent: vòng đen. Trên tile tối: vòng accent.
+  - Giữa vòng là `n/tổng`.
+- **Nút viên:**
+  - Màu trắng, có bóng.
+  - Cao 40 trên desktop. Trên toolbar mobile cao 32 nhưng vùng chạm vẫn đủ 44.
+- **Bảng:**
+  - Nằm trong tile trắng.
+  - Tiêu đề bảng chữ xám nhỏ, đậm 600.
+  - Các hàng ngăn bằng đường hair; số canh phải.
+
+### Kiểm tra trước khi giao
+
+1. **Đếm cỡ chữ** trên trang:
+   - Mobile chỉ dùng {14, 16, 20, 32}, cộng 40 nếu là trang spacious.
+   - Desktop chỉ dùng {14, 16, 20, 28, 48}, cộng 64 nếu là trang spacious.
+2. **Đếm bo góc:** chỉ có 20, 10 và pill.
+3. **Ở khổ 390, 360 và 320:**
+   - Không có gì phải kéo ngang.
+   - Không chữ nào dưới 14.
+4. **Màu tile:** mỗi màn tối đa 1 tile accent và 1 tile tối.
+5. **Chụp ảnh thật** để xem, không chỉ dựa vào lint.
 
 ## Nền tảng và nguồn tham khảo
 
