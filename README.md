@@ -1,292 +1,256 @@
-# nguyen0xhieu — Design System v4 (Bento)
+# nguyen0xhieu Design System v4 (Bento)
 
-Nguồn chuẩn để thiết kế và code mọi sản phẩm của nguyen0xhieu. **Giữ bộ màu gốc**, dùng hai mật độ web theo mục đích và một tập component nhất quán. Cập nhật 2026-11-08: **v4 lấy Bento làm phong cách web mặc định** (mục ngay dưới). Các mục v3 phía sau vẫn đúng về màu, token và pattern dữ liệu, nhưng khi mâu thuẫn về bề mặt, bo góc, cỡ chữ, spacing thì **Bento thắng**.
+The reference for designing and coding every nguyen0xhieu product. **The original palette stays**, with two web densities by purpose and one consistent component set. Updated 2026-11-08: **v4 makes Bento the default web style** (next section). The v3 sections below remain correct on color, tokens and data patterns, but on surfaces, radius, type size and spacing **Bento wins**.
 
-## Dùng bộ này
+## Using it
 
-1. Đọc tài liệu và `tokens.json` trước khi thiết kế.
-2. Chọn **pattern**: editorial/landing, bảng dữ liệu hay danh sách công việc.
-3. Chọn profile cho từng trang/vùng: `spacious` hoặc `compact`.
-4. Dùng `web.css` xuất từ token; không tự tạo màu hay giảm spacing ngẫu nhiên.
-5. Nếu có ngoại lệ đã duyệt, ghi vào `products` và tài liệu sản phẩm. Ngoại lệ sản phẩm ưu tiên trong đúng phạm vi đó.
+1. Read this doc and `tokens.json` before designing.
+2. Choose a **pattern**: editorial/landing, data table or task list.
+3. Choose a profile per page/region: `spacious` or `compact`.
+4. Use `web.css` exported from tokens. Don't invent colors or cut spacing arbitrarily.
+5. Record approved exceptions in `products` and the product docs. A product exception takes priority only within its scope.
 
-| File | Vai trò |
+| File | Role |
 |---|---|
-| `tokens.json` | Màu Light/Dark, typography, spacing, component, hai profile và ngoại lệ sản phẩm |
-| `web.css` | CSS variables được xuất tự động từ token, gồm màu/type/profile/product |
-| `export_web.py` | Chạy `python export_web.py` để xuất lại CSS; không cần dependency |
-| `README.md` | Quyết định thiết kế, cách chọn pattern và tiêu chí kiểm tra |
+| `tokens.json` | Light/Dark colors, typography, spacing, components, two profiles, product exceptions |
+| `web.css` | CSS variables auto-exported from tokens (color/type/profile/product) |
+| `export_web.py` | `python export_web.py` regenerates the CSS; no dependencies |
+| `README.md` | Design decisions, how to choose a pattern, acceptance criteria |
 
-Trong HTML: `<body data-ds-product="0xhieu-xyz" data-ds-profile="compact">`. Theme dùng `data-ds-theme="dark"` khi sản phẩm có hỗ trợ. Profile đổi theo trang, không đổi tùy tiện chỉ vì viewport nhỏ.
+In HTML: `<body data-ds-product="0xhieu-xyz" data-ds-profile="compact">`. Theme: `data-ds-theme="dark"` where supported. Profile changes by page, not just because the viewport is small.
 
-## Bento v4 — phong cách web mặc định (chốt 2026-11-08)
+## Bento v4: default web style (decided 2026-11-08)
 
-Nguồn: giao diện 0xhieu.xyz được duyệt 07/11/2026. Token đầy đủ nằm ở `tokens.json → bento`, CSS ở `web.css` (`--ds-bento-*`).
+Source: the 0xhieu.xyz UI approved 2026-11-07. Full tokens in `tokens.json → bento`, CSS in `web.css` (`--ds-bento-*`).
 
 **Figma:** https://www.figma.com/design/V0GuQUwipow6yFqNi4y7qg/hieu
-- Biến: `Primitives`, `Bento` (Light/Dark), `Spacing & Radius`.
-- 24 text style theo chức năng (`Mobile/…` và `Desktop/…`).
-- Component Bento.
-- Page **Icons**: 328 icon Lucide 1.59.0, dùng chung cho mọi sản phẩm.
-- Nhóm **Brand** (`Brand/x`, `Brand/discord`, `Brand/telegram`, `Brand/github`): Lucide 1.x đã bỏ icon thương hiệu nên vẽ thêm, cùng nét stroke 2 như icon trên 0xhieu.xyz.
+- Variables: `Primitives`, `Bento` (Light/Dark), `Spacing & Radius`.
+- 24 functional text styles (`Mobile/…` and `Desktop/…`).
+- Bento components.
+- **Icons** page: 328 Lucide 1.59.0 icons shared by all products.
+- **Brand** group (`Brand/x`, `Brand/discord`, `Brand/telegram`, `Brand/github`): Lucide 1.x removed brand icons, so these are drawn with the same 2 stroke as the icons on 0xhieu.xyz.
 
-### Bảng màu mở rộng
+### Extended palette
 
-Có 16 họ màu × 11 sắc độ (50–950), cộng thêm neutral 0–1000, dùng tự do khi thiết kế:
-- **Họ màu:** slate, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, purple, pink, brown.
-- **Cách tạo:** 500 là màu gốc; sắc độ nhạt pha dần về trắng, sắc độ đậm pha dần về gần đen.
-- **Trong code:** `--ds-palette-<họ>-<sắc độ>`, ví dụ `--ds-palette-teal-500`.
-- **Trong Figma:** collection `Primitives`.
-- Giao diện chuẩn vẫn ưu tiên màu ngữ nghĩa Bento. Bảng màu mở rộng dùng cho minh hoạ, biểu đồ, nhãn phân loại và sản phẩm mới.
+16 color families × 11 shades (50–950), plus neutral 0–1000, free to use in design:
+- **Families:** slate, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, purple, pink, brown.
+- **Construction:** 500 is the base; lighter shades blend toward white, darker toward near black.
+- **Code:** `--ds-palette-<family>-<shade>`, e.g. `--ds-palette-teal-500`.
+- **Figma:** collection `Primitives`.
+- Standard UI still prefers Bento semantic colors. The extended palette is for illustrations, charts, category labels and new products.
 
-### Bề mặt
+### Surfaces
 
-| Thứ | Giá trị | Dùng cho |
+| Item | Value | Use |
 |---|---|---|
-| Canvas | `#F2F2F0` | Nền trang. Tiêu đề trang và nhãn nhóm nằm thẳng trên canvas, **không** có dải nền trắng. |
-| Tile | `#FFFFFF` | Mọi nội dung đọc được nằm trong tile. Không viền, không bóng. |
-| Hair | `#ECECEA` | Đường kẻ 1px giữa các hàng trong tile. |
-| Tile tối | `#161616` | Ô tương phản (cảnh báo, khối quan trọng thứ hai). Chữ trắng, số dùng màu accent. |
-| Tile accent | màu accent sản phẩm | Số liệu/khối chính. Chữ đen; nút trong đó nền đen chữ accent. |
-| Chip | màu canvas | Thẻ, chip, ô icon, nút phụ bên trong tile trắng. |
+| Canvas | `#F2F2F0` | Page background. Page titles and group labels sit directly on canvas, with **no** white band. |
+| Tile | `#FFFFFF` | All readable content goes in tiles. No border, no shadow. |
+| Hair | `#ECECEA` | 1 px line between rows in a tile. |
+| Dark tile | `#161616` | Contrast block (warning, second key block). White text, numbers in accent. |
+| Accent tile | product accent | Main metric/block. Black text; buttons inside are black with accent text. |
+| Chip | canvas color | Tags, chips, icon boxes, secondary buttons inside white tiles. |
 
-- Mỗi màn **tối đa 1 tile accent và 1 tile tối**; còn lại là tile trắng.
-- **Thẻ:** thẻ quan trọng nền đen chữ trắng/accent, thẻ thường nền canvas chữ đen. Không dùng thẻ viền.
-- **Trạng thái:** việc kế tiếp là chip accent, quá giờ/nguy hiểm là chip `red-soft` chữ `red-text`, việc xong là chữ muted gạch ngang. Màu trạng thái luôn đi kèm chữ.
-- **Bo góc chỉ 3 mức:**
-  - **20** cho tile và popup.
-  - **10** cho chip, thẻ, logo, ô icon, nút nhỏ, input.
-  - **Pill** cho navbar, tab, toggle, ô đếm, nút nổi, avatar.
-- **Bóng:** chỉ đồ vật **nổi** có `shadow-y2`: navbar dính, nút toolbar trang, nút nổi, popup. Tile và link/nút nằm trong tile thì phẳng.
-- **Độ đậm chữ chỉ 3 mức:**
-  - **400** cho chữ đọc.
-  - **600** cho nhãn, tên, nút, tiêu đề tile.
-  - **700** cho tiêu đề trang và số lớn.
-  - Không dùng 500 hay 800.
+- Each screen has **at most 1 accent tile and 1 dark tile**; the rest are white.
+- **Tags:** important = black with white/accent text; normal = canvas with black text. No outlined tags.
+- **Status:** next task = accent chip; overdue/danger = `red-soft` chip with `red-text`; done = muted strikethrough. Status color always comes with text.
+- **Only 3 radii:** **20** for tiles and popups; **10** for chips, tags, logos, icon boxes, small buttons, inputs; **Pill** for navbar, tabs, toggles, counters, floating buttons, avatars.
+- **Shadow:** only **floating** things get `shadow-y2`: sticky navbar, page toolbar buttons, floating buttons, popups. Tiles and links/buttons inside tiles are flat.
+- **Only 3 weights:** **400** reading text; **600** labels, names, buttons, tile titles; **700** page titles and big numbers. No 500 or 800.
 
-### Kiểu chữ — đặt tên theo chức năng
+### Type: named by function
 
-Mỗi chữ trên giao diện thuộc **đúng một kiểu theo chức năng**. Code chỉ gọi theo tên, qua biến CSS `--ds-type-<tên>-size`, `-line`, `-weight`, `-tracking`; không gõ cỡ px tay. Mỗi kiểu có cỡ riêng cho mobile và desktop, và biến CSS tự đổi khi màn ≤640.
+Every piece of text belongs to **exactly one functional style**. Code uses names only, via `--ds-type-<name>-size`, `-line`, `-weight`, `-tracking`; never hand-typed px. Each style has mobile and desktop sizes, and the variables switch at ≤640.
 
-- **Mobile nhỏ và thoáng:** đọc rõ nhưng không to, không hét.
-- **Desktop to:** đủ để chụp màn hình dùng làm banner, ảnh bìa, slide.
+- **Mobile is small and airy:** clear but not shouting.
+- **Desktop is large:** enough for screenshots used as banners, covers, slides.
 
-| Kiểu | Tên trong code | Mobile | Desktop | Weight | Dùng cho |
+| Style | Code name | Mobile | Desktop | Weight | Use |
 |---|---|---|---|---|---|
-| **Tiêu đề lớn** | `display` | 28/32 | 56/60 | 700 | Big numbers in accent/dark tiles, CV tagline, checklist counts. Max 2 per screen. |
-| **Tiêu đề trang** | `page` | 20/26 | 32/40 | 700 | One page title per screen. |
+| **Display** | `display` | 28/32 | 56/60 | 700 | Big numbers in accent/dark tiles, CV tagline, checklist counts. Max 2 per screen. |
+| **Page title** | `page` | 20/26 | 32/40 | 700 | One page title per screen. |
 | **Header** | `header` | 16/22 | 20/28 | 600 | Titles of tiles, boxes, dropdowns, popups; person name; job role. |
-| **Nội dung** | `content` | 14/20 | 16/24 | 400 | Main reading text: task/row text, paragraphs, list items. Names in a row use weight 600. |
-| **Nội dung phụ** | `secondary` | 13/18 | 14/20 | 400 | Supporting text under content: row meta, location, stat caption, sub-lines. Grey. |
-| **Số liệu** | `data` | 13/18 | 14/20 | 400 | Table cells and numeric values in lists. tabular-nums. |
-| **Nhãn** | `label` | 12/16 | 13/18 | 600 | Tags, chips, table headers, group labels, small box labels, counters. |
-| **Nút** | `button` | 14/20 | 15/20 | 600 | Buttons, nav tabs, toggles, link chips. |
-| **Ghi chú** | `note` | 12/16 | 13/18 | 400 | Captions, hints, helper/error text, empty states, footnotes. |
-| **Ô nhập** | `input` | 16/24 | 16/24 | 400 | Form inputs and selects (16 on mobile prevents iOS zoom). |
+| **Content** | `content` | 14/20 | 16/24 | 400 | Main reading text: task/row text, paragraphs, list items. Names in a row use weight 600. |
+| **Secondary** | `secondary` | 13/18 | 14/20 | 400 | Supporting text under content: row meta, location, stat caption, sub-lines. Grey. |
+| **Data** | `data` | 13/18 | 14/20 | 400 | Table cells and numeric values in lists. tabular-nums. |
+| **Label** | `label` | 12/16 | 13/18 | 600 | Tags, chips, table headers, group labels, small box labels, counters. |
+| **Button** | `button` | 14/20 | 15/20 | 600 | Buttons, nav tabs, toggles, link chips. |
+| **Note** | `note` | 12/16 | 13/18 | 400 | Captions, hints, helper/error text, empty states, footnotes. |
+| **Input** | `input` | 16/24 | 16/24 | 400 | Form inputs and selects (16 on mobile prevents iOS zoom). |
 | **Hero** | `hero` | 32/36 | 72/76 | 700 | Spacious pages only (landing, cover): one line per page. |
 
-**Quy tắc:**
-- **Độ đậm chỉ 400 · 600 · 700.** Không dùng 800 vì nhìn kém sang.
-- Tên dự án hoặc tên trong hàng dùng **Nội dung** đậm 600, không tạo cỡ mới.
-- Chưa có kiểu nào hợp với một chữ mới thì **thêm kiểu mới vào bảng này**, đặt tên theo chức năng. Không gõ cỡ px tay.
-- Mọi con số dùng `tabular-nums`.
+**Rules:**
+- **Weights only 400 · 600 · 700.** 800 looks less refined.
+- Project or row names use **Content** at weight 600; no new size.
+- If no style fits new text, **add a style to this table**, named by function. Never hand-type px.
+- All numbers use `tabular-nums`.
 
-### Bố cục chung
+### Layout
 
-- **Khung:** rộng tối đa 1280, lề ngang 24 trên desktop và 16 trên mobile.
-- **Navbar:** viên trắng nổi, dính trên đầu. Logo bên trái, cụm tab bên phải; tab đang mở nền accent, chữ đen.
-- **Đầu trang:** tiêu đề bên trái, nút điều khiển bên phải, đặt thẳng trên canvas. Nút điều khiển là viên trắng có bóng.
-- **Lưới:** desktop 4 cột, ≤1024 còn 2 cột, mobile 2 cột cho ô số liệu và ô tính năng.
-  - Danh sách, checklist và bảng chiếm trọn hàng.
-  - Ô mở rộng được (`details`) khi mở ra chiếm 2 cột, trên mobile chiếm cả hàng.
+- **Frame:** max width 1280, side margin 24 desktop and 16 mobile.
+- **Navbar:** floating white pill, sticky. Logo left, tabs right; active tab has accent background and black text.
+- **Page header:** title left, controls right, directly on canvas. Controls are white pills with shadow.
+- **Grid:** desktop 4 columns, ≤1024 2 columns, mobile 2 columns for metric and feature tiles.
+  - Lists, checklists and tables take a full row.
+  - Expandable tiles (`details`) take 2 columns when open, a full row on mobile.
 
-### Trang dữ liệu — khít và sạch (`data-ds-profile="compact"`)
+### Data pages: tight and clean (`data-ds-profile="compact"`)
 
-Gồm Valuation, Work, dashboard, admin, tracker, screener.
-
-| | Desktop | Mobile |
-|---|---|---|
-| Khe giữa tile | 12 | 12 |
-| Khe giữa các khối | 12 | 12 |
-| Đệm trong tile | 20 | 16 |
-| Hàng tối thiểu | 40 | 44 (vùng chạm) |
-| Đệm dọc hàng | 12 | 12 |
-
-- **Một khe 12 cho mọi thứ**, để cả trang đọc như một bảng liền.
-- Hàng trong tile ngăn bằng đường hair. **Không đặt card trong card.**
-- **Bảng trên mobile không bao giờ kéo ngang.** Theo thứ tự:
-  1. Ẩn bớt cột phụ.
-  2. Rút gọn giá trị ghép, chỉ giữ số chính (ví dụ ATH chỉ còn `đỉnh (×N)`).
-  3. Không bao giờ thu nhỏ chữ.
-- **Danh sách tham khảo** (danh sách dự án, hướng dẫn) gom vào **một tile dropdown, mặc định gập**. Nội dung dùng hằng ngày thì để mở sẵn.
-- **Checklist:**
-  - Gồm một tile hero (ngày, số việc, vòng tiến độ) và ngay dưới là một tile danh sách trắng.
-  - Tick tự về 0 khi sang ngày hoặc tuần mới.
-  - Việc có giờ hẹn hiện trong ô "Lịch hôm nay".
-- **Toolbar** một hàng. Control nào hết công dụng thì **bỏ hẳn**, không để nổi lơ lửng.
-- Không dùng cỡ `bento-hero`.
-
-### Trang trình bày — có khoảng thở (`data-ds-profile="spacious"`)
-
-Gồm CV, portfolio, landing, marketing, giới thiệu.
+Valuation, Work, dashboards, admin, trackers, screeners.
 
 | | Desktop | Mobile |
 |---|---|---|
-| Khe giữa tile | 16 | 12 |
-| Khe giữa các mục | 48 | 32 |
-| Đệm trong tile | 32 | 20 |
-| Tile hero | chiếm 2/4 cột, cao tối thiểu 320, đệm 40 | đệm 24 |
+| Tile gap | 12 | 12 |
+| Block gap | 12 | 12 |
+| Tile padding | 20 | 16 |
+| Minimum row | 40 | 44 (touch) |
+| Row vertical padding | 12 | 12 |
 
-- Một hero mạnh duy nhất, đứng cạnh tile số liệu accent và tile liên hệ.
-- Các mục cách nhau bằng khe lớn; tile trong cùng một mục dùng khe tile.
-- Đoạn văn rộng tối đa 680.
-- Ảnh nằm trong tile riêng, có chú thích, không đè chữ lên ảnh.
-- Nút liên hệ là chip canvas phẳng.
+- **One 12 gap for everything**, so the page reads as one continuous board.
+- Rows in tiles separate with hair lines. **No card in card.**
+- **Mobile tables never scroll horizontally.** In order: (1) hide secondary columns; (2) shorten composite values to the main number (e.g. ATH becomes `peak (×N)`); (3) never shrink text.
+- **Reference lists** (project lists, guides) go in **one dropdown tile, collapsed by default**. Daily content stays open.
+- **Checklist:** one hero tile (date, task count, progress ring) directly above one white list tile. Ticks reset on a new day or week. Timed tasks appear in the "Lịch hôm nay" box.
+- **Toolbar** on one row. Controls that no longer do anything are **removed**, not left floating.
+- No `bento-hero` size.
 
-### Component mẫu
+### Presentation pages: room to breathe (`data-ds-profile="spacious"`)
 
-- **Tile số liệu:**
-  - Nền accent hoặc nền tối.
-  - Nhãn nhỏ đậm 600 ở trên, số cỡ display ở giữa, chú thích nhỏ ở dưới.
-- **Tile danh sách:**
-  - Hàng tiêu đề gồm tiêu đề và ô đếm dạng pill nền canvas.
-  - Các hàng ngăn bằng đường hair.
-- **Tile dropdown:**
-  - Hàng tóm tắt gồm tiêu đề (`bento-title`), ô đếm và mũi tên.
-  - Mở ra là các nhóm hàng.
-- **Hàng:**
-  - Đầu hàng: logo hoặc ô check 36.
-  - Giữa: chữ chính (body) và dòng meta (small, xám).
-  - Cuối hàng: nút icon 32 nền canvas, bo 10.
-- **Checkbox:**
-  - Hình tròn 24, viền xám 2px.
-  - Khi tick: nền đen, dấu check trắng; chữ đổi sang muted và gạch ngang.
-- **Vòng tiến độ:**
-  - Cỡ 92 trên desktop, 80 trên mobile.
-  - Trên tile accent: vòng đen. Trên tile tối: vòng accent.
-  - Giữa vòng là `n/tổng`.
-- **Nút viên:**
-  - Màu trắng, có bóng.
-  - Cao 40 trên desktop. Trên toolbar mobile cao 32 nhưng vùng chạm vẫn đủ 44.
-- **Bảng:**
-  - Nằm trong tile trắng.
-  - Tiêu đề bảng chữ xám nhỏ, đậm 600.
-  - Các hàng ngăn bằng đường hair; số canh phải.
+CV, portfolio, landing, marketing, about pages.
 
-### Kiểm tra trước khi giao
-
-1. **Đếm cỡ chữ** trên trang:
-   - Mọi chữ đều thuộc một kiểu trong bảng **Kiểu chữ**.
-   - Trong CSS không còn `font-size` gõ số px tay.
-2. **Đếm bo góc:** chỉ có 20, 10 và pill.
-3. **Ở khổ 390, 360 và 320:**
-   - Không có gì phải kéo ngang.
-   - Không chữ nào dưới 12.
-4. **Màu tile:** mỗi màn tối đa 1 tile accent và 1 tile tối.
-5. **Chụp ảnh thật** để xem, không chỉ dựa vào lint.
-
-## Nền tảng và nguồn tham khảo
-
-Đây là **bộ quy tắc tổng hợp cho sản phẩm của mình**, không giả vờ một thư viện quy định toàn bộ các con số:
-
-- [Radix spacing](https://www.radix-ui.com/themes/docs/theme/spacing): scale 4/8/12/16/24…, density thay đổi có hệ thống.
-- [Radix Table — mã nguồn](https://github.com/radix-ui/themes/blob/main/packages/radix-ui-themes/src/components/table.css): compact cell padding 8px, canh nội dung, dùng kẻ phân cách và một bề mặt chung.
-- [shadcn Tasks — mã nguồn](https://github.com/shadcn-ui/ui/blob/main/apps/v4/app/%28app%29/examples/tasks/components/data-table.tsx): workspace công việc tổ chức theo dòng/bảng với thao tác chung; không biến mỗi thông tin thành một card.
-- [Carbon data table](https://www.carbondesignsystem.com/building-blocks/core/components/data-table/guidelines): nhiều mức mật độ, 32px cho dense desktop và 40px mặc định. Header Valuation 56px là yêu cầu riêng của sản phẩm, **không phải** thông số suy ra từ Carbon.
-
-## Hai profile web
-
-| | `spacious` — trình bày | `compact` — công việc/dữ liệu |
+| | Desktop | Mobile |
 |---|---|---|
-| Dùng cho | CV, portfolio, landing, trang giới thiệu | Valuation, Work/Airdrop, dashboard, Admin, bảng dữ liệu |
-| Mục tiêu | Đọc và hiểu câu chuyện, CTA rõ | Quét, so sánh và thao tác nhanh |
-| Nhịp chính | 8px | 4px |
-| Lề mobile | 16px | 16px |
-| Lề desktop | Theo khung 1200px, lề tối thiểu 48px | 24px; không bắt buộc khung 1200 |
-| Nhóm nội dung | 64px desktop / 32px mobile | 16px |
-| Panel | Đệm 16–32px, khoảng giữa 16–24px | Cell/đệm chính 8px, panel phụ 8–12px |
-| Nội dung | Body 16/24, lead 18/28 | Body 16/24; số/task/metadata 14/20 |
-| Header panel | 20/28 khi cần nhấn | 16/24, mobile có thể 14/20 |
-| Dòng | Theo nội dung, list min 56 | Mặc định 40; dense desktop 32; touch 44 |
-| Chiều cao | Theo nội dung | Theo nội dung, trừ panel cố định đã được yêu cầu |
-| Bề mặt | Khối nội dung rõ; whitespace có chủ đích | Một bề mặt theo nhóm, ít lớp nền/viền; kẻ hàng thay card lồng card |
+| Tile gap | 16 | 12 |
+| Section gap | 48 | 32 |
+| Tile padding | 32 | 20 |
+| Hero tile | 2 of 4 columns, min height 320, padding 40 | padding 24 |
 
-Không lấy spacing section của landing áp vào workspace. Không lấy chữ native-app 22px áp cho bảng web. Một trang có thể có hero spacious và vùng dữ liệu compact, nhưng ranh giới phải rõ.
+- One strong hero beside an accent metric tile and a contact tile.
+- Sections separate with large gaps; tiles in a section use the tile gap.
+- Paragraphs max 680 wide.
+- Images in their own tile with a caption, no text over images.
+- Contact buttons are flat canvas chips.
 
-## Bộ màu — giữ nguyên
+### Sample components
 
-- Global brand: **0x Blue `#1E6DF7`** ở cả Light/Dark. Primary dùng `blue` + `on-blue`; small text trên nền tint dùng `blue-strong`.
-- Văn bản chỉ ba cấp: `ink` (chính), `grey` (phụ), `muted` (metadata/disabled). Không dùng muted cho việc người dùng cần đọc để hành động.
-- Nền `ground`, nhóm `mist`, kẻ `line`. Không tự pha xám thứ tư.
-- Mỗi màu trạng thái có base / `-text` / `-soft`: green thành công, red lỗi/nguy hiểm, yellow chờ/cảnh báo, orange chú ý, cyan thông tin, purple chuỗi phụ/tính năng mới. Màu trạng thái phải kèm chữ hoặc ký hiệu rõ nghĩa.
-- Chữ trên yellow luôn đen. Nền solid là mặc định; tối đa một gradient lớn/màn, không dùng gradient cho chữ, icon nhỏ hay bảng dữ liệu.
-- Disabled: nền line, chữ muted, không shadow, không giảm opacity.
-- Sản phẩm 0xhieu.xyz giữ primary đen và vàng mắt mèo `#FFA111`; đó là override đã duyệt trong `products.0xhieu-xyz`, không đổi palette global.
+- **Metric tile:** accent or dark background; small 600 label on top, display-size number in the middle, small caption below.
+- **List tile:** title row with title and a canvas pill counter; rows separated by hair lines.
+- **Dropdown tile:** summary row with title (`bento-title`), counter and chevron; opens into row groups.
+- **Row:** start: logo or 36 check box; middle: main text (body) and meta line (small, grey); end: 32 icon button, canvas, radius 10.
+- **Checkbox:** circle 24, 2 px grey border. Ticked: black fill, white check; text becomes muted and struck through.
+- **Progress ring:** 92 desktop, 80 mobile. Black on an accent tile, accent on a dark tile. `n/total` in the center.
+- **Pill button:** white with shadow, 40 high on desktop. On a mobile toolbar 32 high with a full 44 touch target.
+- **Table:** in a white tile; small grey 600 headers; rows separated by hair lines; numbers right-aligned.
+
+### Pre-delivery check
+
+1. **Count type sizes:** every text belongs to a style in the **Type** table, and CSS has no hand-typed `font-size` px.
+2. **Count radii:** only 20, 10 and pill.
+3. **At 390, 360 and 320:** nothing scrolls horizontally and no text is below 12.
+4. **Tile colors:** at most 1 accent tile and 1 dark tile per screen.
+5. **Look at real screenshots**, not only lint.
+
+## Foundations and references
+
+This is **a synthesized rule set for these products**; no single library defines all the numbers:
+
+- [Radix spacing](https://www.radix-ui.com/themes/docs/theme/spacing): 4/8/12/16/24… scale, systematic density.
+- [Radix Table source](https://github.com/radix-ui/themes/blob/main/packages/radix-ui-themes/src/components/table.css): compact cell padding 8 px, aligned content, separators and one shared surface.
+- [shadcn Tasks source](https://github.com/shadcn-ui/ui/blob/main/apps/v4/app/%28app%29/examples/tasks/components/data-table.tsx): task workspace organized as rows/tables with shared actions, not one card per fact.
+- [Carbon data table](https://www.carbondesignsystem.com/building-blocks/core/components/data-table/guidelines): density levels, 32 px dense desktop and 40 px default. Valuation's 56 px header is a product requirement, **not** derived from Carbon.
+
+## Two web profiles
+
+| | `spacious`: presentation | `compact`: work/data |
+|---|---|---|
+| Use | CV, portfolio, landing, about | Valuation, Work/Airdrop, dashboards, Admin, data tables |
+| Goal | Read the story, clear CTA | Scan, compare, act fast |
+| Base rhythm | 8 px | 4 px |
+| Mobile margin | 16 px | 16 px |
+| Desktop margin | 1200 px frame, min margin 48 px | 24 px; 1200 frame not required |
+| Content groups | 64 desktop / 32 mobile | 16 px |
+| Panel | Padding 16–32, gaps 16–24 | Cell/main padding 8, secondary panels 8–12 |
+| Text | Body 16/24, lead 18/28 | Body 16/24; numbers/tasks/metadata 14/20 |
+| Panel header | 20/28 for emphasis | 16/24, mobile may be 14/20 |
+| Rows | By content, list min 56 | Default 40; dense desktop 32; touch 44 |
+| Height | By content | By content, except panels explicitly fixed |
+| Surface | Clear content blocks; deliberate whitespace | One surface per group, few background/border layers; row lines, not nested cards |
+
+Don't apply landing section spacing to a workspace, or 22 px native-app text to web tables. A page can have a spacious hero and a compact data area, with a clear boundary.
+
+## Palette: unchanged
+
+- Global brand: **0x Blue `#1E6DF7`** in Light and Dark. Primary uses `blue` + `on-blue`; small text on tinted backgrounds uses `blue-strong`.
+- Text has only three levels: `ink` (main), `grey` (secondary), `muted` (metadata/disabled). Don't use muted for what the user must read to act.
+- Background `ground`, group `mist`, lines `line`. No fourth grey.
+- Each status color has base / `-text` / `-soft`: green success, red error/danger, yellow pending/warning, orange attention, cyan info, purple secondary chain/new feature. Status color must come with text or a clear symbol.
+- Text on yellow is always black. Solid fills by default; at most one large gradient per screen, none on text, small icons or data tables.
+- Disabled: line background, muted text, no shadow, no reduced opacity.
+- 0xhieu.xyz keeps black primary and cat-eye yellow `#FFA111`. That is an approved override in `products.0xhieu-xyz` and does not change the global palette.
 
 ## Typography
 
-Inter cho thiết kế/Figma/slide; system Apple/SF Pro với fallback system cho code web/app. Giá trị đầy đủ và letter-spacing nằm trong `type.groups`.
+Inter for design/Figma/slides; Apple system/SF Pro with system fallback for web/app code. Full values and letter-spacing in `type.groups`.
 
-| Vai trò web | Style | Thông số |
+| Web role | Style | Specs |
 |---|---|---|
 | Metadata/data | web-caption | 14/20, 400 |
-| Nhãn | web-label | 14/20, 600 |
-| Nội dung | web-body | 16/24, 400 |
+| Label | web-label | 14/20, 600 |
+| Content | web-body | 16/24, 400 |
 | Panel/toolbar | web-nav-button | 16/24, 600 |
 | Lead | web-lead | 18/28, 400 |
-| Tiêu đề nhỏ | web-h4 | 20/28, 600 |
-| Tiêu đề màn/mục | web-h3 | 24/32, 600 |
-| Display | web-h2/h1/hero | 40/48, 56/64, 72/80, 700; mobile theo style riêng |
+| Small heading | web-h4 | 20/28, 600 |
+| Screen/section heading | web-h3 | 24/32, 600 |
+| Display | web-h2/h1/hero | 40/48, 56/64, 72/80, 700; mobile uses its own styles |
 
-Chữ dữ liệu không dưới 14. Số dùng `tabular-nums`; nhãn canh trái, số theo cột. Task/tên/tag được xuống dòng, không mất chữ. Không đổi weight làm nhích layout khi hover. Chữ body có thể giới hạn 680px; bảng không chịu giới hạn này.
+Data text is never below 14. Numbers use `tabular-nums`; labels left-aligned, numbers in columns. Tasks/names/tags wrap and never lose text. Hover never shifts layout by weight. Body text may limit to 680 px; tables don't.
 
-## Component và bề mặt
+## Components and surfaces
 
-- Radius: panel 16, control nhỏ 8, data row 0, pill/circle 9999. Không bọc từng nhãn/số bằng thẻ bo góc.
-- Flat/border line là mặc định. `shadow-y2` chỉ cho overlay, menu nổi hoặc bề mặt nổi có lý do; không phủ bóng mọi nút/card.
-- Nút thường 40px compact, toolbar nhìn thấy 32; spacious 48. Trên thiết bị cảm ứng đảm bảo mục bấm chung tối thiểu 44, không chồng nhau. Ngoại lệ toolbar sản phẩm phải ghi rõ.
-- Ô nhập compact 40, touch 44; chữ input mobile 16 để tránh tự zoom. Form có label, focus 2px và error text.
-- Focus nhìn rõ, offset 2px. Hover dùng màu/chỉ báo ổn định; không nâng card hay thay độ rộng chữ. Không bổ sung chuyển động trang trí.
-- Popup theo nội dung, có max-height trong viewport và cuộn; khóa nền khi mở. Escape/backdrop theo hành vi đã định, form nhập dài không tự mất khi bấm nhầm.
-- Icon dùng Lucide 1.59.0, stroke 2, size 16/20/24/32. Không dùng emoji làm icon thao tác.
+- Radius: panel 16, small control 8, data row 0, pill/circle 9999. Don't wrap each label/number in a rounded box.
+- Flat/line border is default. `shadow-y2` only for overlays, floating menus or justified raised surfaces; not on every button/card.
+- Buttons: 40 compact, visible toolbar 32, spacious 48. Touch targets at least 44 and non-overlapping. Product toolbar exceptions must be documented.
+- Inputs: compact 40, touch 44; mobile input text 16 to prevent zoom. Forms have labels, 2 px focus and error text.
+- Focus is clearly visible, offset 2 px. Hover uses stable color/indicators; no card lift or text width change. No decorative motion.
+- Popups fit content, with viewport max-height and scroll; background locked while open. Escape/backdrop as defined; long forms don't vanish on a stray click.
+- Icons: Lucide 1.59.0, stroke 2, sizes 16/20/24/32. No emoji as action icons.
 
-## Pattern: bảng dữ liệu
+## Pattern: data table
 
-Một bề mặt bảng, header và thân thẳng cột. Độ rộng theo nội dung, dành chỗ cho trường dài; không chia đều mọi cột bằng phần trăm. Header và body có cùng quy tắc đo, cùng hướng cuộn. Bảng cuộn nội bộ khi tổng minimum width vượt viewport; không tràn toàn trang hoặc đè cột.
+One table surface with aligned header and body. Widths follow content, with room for long fields; don't divide all columns equally by percent. Header and body share measurement rules and scroll direction. The table scrolls internally when total minimum width exceeds the viewport; never overflow the page or overlap columns.
 
-Không ngắt một giá trị ghép cần đọc cùng nhau chỉ để giữ cột hẹp. Không thu nhỏ font để che lỗi width. Chỉ vùng danh sách dài mới cần giới hạn cao. Không thêm dòng rỗng để lấp box. Các header cùng vai trò dùng token chung, không sửa độc lập.
+Don't break a composite value that must be read together just to keep a column narrow. Don't shrink fonts to hide width bugs. Only long list regions need a height limit. Don't add empty rows to fill a box. Headers with the same role share a token.
 
-## Pattern: workspace công việc
+## Pattern: task workspace
 
-Mỗi nhóm có một bề mặt chung; mỗi dự án là một hàng. Desktop tách vùng thông tin dự án và vùng việc. **Phase là cột nhãn cạnh task**, không phải một tiêu đề lớn chiếm thêm hàng trên từng task. Mobile chuyển thông tin dự án lên trên, nhưng phase và việc vẫn cạnh nhau.
+Each group has one shared surface; each project is a row. Desktop separates project info and tasks. **Phase is a label column beside the task**, not a large heading taking an extra row per task. Mobile moves project info to the top, keeping phase and task together.
 
-Giữ toàn bộ task/link, không tự thêm điểm số/checklist/tính năng AI. Không dùng dải màu Daily lặp xen kẽ; màu chỉ cho nhóm/trạng thái có nghĩa. Rank có thể là metadata; không tạo nhiều lớp nhãn, separator và badge cho cùng một ý.
+Keep all tasks/links; don't add scores, checklists or AI features. No repeating Daily color bands; color only for meaningful groups/statuses. Rank can be metadata; avoid multiple layers of labels, separators and badges for one idea.
 
 ## Pattern: CV/landing
 
-Chọn một trục căn lề và phân cấp nội dung. CV là editorial portfolio: avatar, tên và thông điệp nhận diện thành một hero rõ; nội dung kinh nghiệm dễ đọc, hình ảnh có caption. CTA vừa đủ và không cạnh tranh với tiêu đề. Landing marketing có thể dùng display lớn hơn; không bắt CV phải có hero 72px.
+Pick one alignment axis and content hierarchy. A CV is an editorial portfolio: avatar, name and identity message form one clear hero; experience is easy to read; images have captions. CTA is sufficient and doesn't compete with the title. Marketing landings may use larger display; a CV need not have a 72 px hero.
 
-## Quy tắc riêng của 0xhieu.xyz
+## 0xhieu.xyz rules
 
-- `/` spacious; `/valuation` và `/work` compact. `/airdrop` chuyển 301 sang `/work` và có fallback client.
-- Brand đen/vàng cũ. Navbar căn theo khung của profile đang mở.
-- Valuation: 8 token trên cả desktop/mobile; dòng 40, header bảng/popup/box **56**; chữ header desktop16/24, mobile14/20, 600. Ba box **328px cố định**, nội dung dài cuộn; mobile tất cả dùng 2 cột bằng nhau, không tự cho một box span cả hàng.
-- Nhãn/giá trị trong box trái/phải, min-height 56, cho phép tăng để hiện đủ chữ. Ticker dưới $300M đậm đen; từ $300M đậm cam, không chấm. ATH `đầu → cuối (×N)` một dòng, tỷ số tính từ số gốc và cam đậm.
-- Work: project column240 desktop; phase104; padding8; task40 desktop/44 touch; groupgap16. Những kích thước này phục vụ pattern, không dùng làm spacing chung cho mọi thành phần.
-- CV: khung1200; hero trên96/48, khối cách64/32; portrait112/72. Nội dung CV vẫn tiếng Anh, tagline giữ nguyên văn.
-- Toolbar mobile một hàng là yêu cầu riêng: title20/18/16/14, control nhìn thấy32. Không biến ngoại lệ này thành chuẩn touch cho mọi nơi.
+- `/` spacious; `/valuation` and `/work` compact. `/airdrop` redirects 301 to `/work`, with a client fallback.
+- Old black/yellow brand. Navbar aligns to the current profile's frame.
+- Valuation: 8 tokens on desktop and mobile; rows 40, table/popup/box headers **56**; header text 16/24 desktop, 14/20 mobile, 600. Three boxes **328 px fixed**, long content scrolls; mobile uses 2 equal columns and no box spans a row.
+- Box label/value left/right, min-height 56, growing to show full text. Tickers under $300M bold black; from $300M bold orange, no dot. ATH `start → end (×N)` on one line, ratio from raw numbers, bold orange.
+- Work: project column 240 desktop; phase 104; padding 8; task 40 desktop/44 touch; group gap 16. These serve the pattern and aren't general spacing.
+- CV: frame 1200; hero top 96/48, block gap 64/32; portrait 112/72. CV content stays English, tagline verbatim.
+- One-row mobile toolbar is a specific requirement: title 20/18/16/14, visible control 32. Don't make this exception a general touch standard.
 
-## Native app và slide
+## Native app and slides
 
-Giữ nguyên token chuyên biệt hiện có: app scale14/16/18/22/28/34/48, body22/28, input/button48; safe-area theo thiết bị. Slide1920×1080 giữ lề128, rãnh64 và type slide riêng. Chúng không bị thay bằng geometry web compact. Các bảng grid/type trong `tokens.json` là nguồn chính xác.
+Keep existing dedicated tokens: app scale 14/16/18/22/28/34/48, body 22/28, input/button 48; device safe areas. Slides 1920×1080 keep margin 128, gutter 64 and slide type. They aren't replaced by compact web geometry. Grid/type tables in `tokens.json` are authoritative.
 
-## Export, kiểm tra và thay đổi
+## Export, QA and changes
 
-Chạy `python export_web.py`; commit token và CSS xuất cùng nhau. Hash dùng JSON canonical (sort key, bỏ whitespace), không phụ thuộc CRLF/LF của Windows/Linux. Website phải đồng bộ bản CSS và ghi phiên bản, không đọc remote CSS runtime. Dùng nguồn JSON để kiểm tra màu không bị đổi ngoài scope.
+Run `python export_web.py`; commit tokens and exported CSS together. Hashes use canonical JSON (sorted keys, no whitespace), independent of Windows/Linux CRLF/LF. Websites must sync the CSS and record the version, never read remote CSS at runtime. Use the JSON source to verify colors didn't change out of scope.
 
-QA tối thiểu: desktop1440/1024/768 và mobile640/390/360/320; các ngôn ngữ; dữ liệu rỗng/dài; không cắt chữ/tràn cột; đủ link/action; hover/focus; vùng chạm; popup; navbar và back/forward. Xem ảnh thật, không chỉ báo lint. Test component phải kiểm tra vai trò/layout, không chỉ khớp một con số rời rạc.
+Minimum QA: desktop 1440/1024/768 and mobile 640/390/360/320; languages; empty/long data; no clipped text or column overflow; all links/actions; hover/focus; touch targets; popups; navbar and back/forward. Look at real screenshots, not only lint. Component tests check role/layout, not just one isolated number.
 
-Figma gốc: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Token v3 và pattern mới **chưa được đồng bộ sang Figma**; không tuyên bố file Figma đã chứa thay đổi này.
+Original Figma: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. v3 tokens and new patterns are **not yet synced to Figma**; do not claim the file contains these changes.
 
 ## 0xhieu.xyz — workspace alignment approved 2026-11-01
 
