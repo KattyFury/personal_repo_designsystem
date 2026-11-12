@@ -30,14 +30,11 @@ Source: the 0xhieu.xyz UI approved 2026-11-07. Full tokens in `tokens.json → b
 - **Icons** page: 328 Lucide 1.59.0 icons shared by all products.
 - **Brand** group (`Brand/x`, `Brand/discord`, `Brand/telegram`, `Brand/github`): Lucide 1.x removed brand icons, so these are drawn with the same 2 stroke as the icons on 0xhieu.xyz.
 
-### Extended palette
+### Primitives
 
-16 color families × 11 shades (50–950), plus neutral 0–1000, free to use in design:
-- **Families:** slate, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, purple, pink, brown.
-- **Construction:** 500 is the base; lighter shades blend toward white, darker toward near black.
-- **Code:** `--ds-palette-<family>-<shade>`, e.g. `--ds-palette-teal-500`.
-- **Figma:** collection `Primitives`.
-- Standard UI still prefers Bento semantic colors. The extended palette is for illustrations, charts, category labels and new products.
+Only the shades the Bento semantic colors use (26): neutral 0/100/200/400/600/800/900/950/1000, red 50/300/600/950, amber 50/300/800/950, yellow 500, green 50/300/700/950, blue 50/300/600/950.
+- **Code:** `--ds-palette-<family>-<shade>`, e.g. `--ds-palette-yellow-500`.
+- **Figma:** collection `Primitives`. UI uses the Bento semantic colors, not primitives directly.
 
 ### Surfaces
 
