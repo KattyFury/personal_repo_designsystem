@@ -86,6 +86,7 @@ Every piece of text belongs to **exactly one functional style**. Code uses names
 - **Frame:** max width 1280, side margin 24 desktop and 16 mobile.
 - **Navbar:** copy the **Web shell** spec below exactly. Don't redesign it per product.
 - **Page header:** title left, controls right, directly on canvas. Controls are white pills with shadow.
+- **Tool page (editor + options, e.g. Creator Hub Ảnh):** preview big on the left, sized to fit the screen; options in one sticky 320 column on the right, one 40-high row per setting (label 72 + control), hair lines between groups, no group titles or long hints. Must fit 1440×900 without scrolling. Mobile: preview first, options below.
 - **Grid:** desktop 4 columns, ≤1024 2 columns, mobile 2 columns for metric and feature tiles.
   - Lists, checklists and tables take a full row.
   - Expandable tiles (`details`) take 2 columns when open, a full row on mobile.
