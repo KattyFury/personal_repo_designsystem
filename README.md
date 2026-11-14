@@ -109,7 +109,7 @@ Every piece of text belongs to **exactly one functional style**. Code uses names
 | Active tab | accent fill, ink text | same |
 | Brand hover | marker: accent fill behind the name (margin 0 −4, padding 0 4) | same |
 
-- The product icon is a photo or logo, cropped square, shown as a circle. Favicon is the same image cut to a circle with transparent corners.
+- The product icon is the photo or logo **exactly as the user gives it**: no crop, no zoom, only resize. If it isn't square, ask before cropping. Shown as a circle. Favicon is the same image cut to a circle with transparent corners.
 - Clicking the brand goes home. If already home, re-render it.
 - The frame below the bar follows **Layout → Frame**.
 
