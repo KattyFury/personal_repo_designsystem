@@ -84,11 +84,36 @@ Every piece of text belongs to **exactly one functional style**. Code uses names
 ### Layout
 
 - **Frame:** max width 1280, side margin 24 desktop and 16 mobile.
-- **Navbar:** floating white pill, sticky. Logo left, tabs right; active tab has accent background and black text.
+- **Navbar:** copy the **Web shell** spec below exactly. Don't redesign it per product.
 - **Page header:** title left, controls right, directly on canvas. Controls are white pills with shadow.
 - **Grid:** desktop 4 columns, ≤1024 2 columns, mobile 2 columns for metric and feature tiles.
   - Lists, checklists and tables take a full row.
   - Expandable tiles (`details`) take 2 columns when open, a full row on mobile.
+
+### Web shell: copy 0xhieu.xyz (decided 2026-11-14)
+
+**0xhieu.xyz is the reference implementation.** Every new web product (e.g. Creator Hub, hub.0xhieu.xyz) copies its shell 1:1, not "something similar". Source: `website_personal_0xhieu/index.html`, `header` / `.header-inner` / `.header-home` / `nav` / `.nav-btn`.
+
+```
+[ (photo) Name          ( [Tab on] Tab  Tab ) ]
+  └ brand = link home     └ grey track, pill
+```
+
+| Part | Desktop | Mobile ≤640 |
+|---|---|---|
+| Bar | sticky, 12 from top; height 56; padding 0 8 0 16; gap 16; pill; `rgba(255,255,255,.9)` + `backdrop-filter: saturate(1.8) blur(12px)`; shadow `0 1px 2px rgba(0,0,0,.06)` | 8 from top; height 52; padding 0 6 0 12; gap 8 |
+| Brand | `<a>` to the product home; icon + name, gap 8; Header type, weight **700**, ink | gap 6; **name stays visible** |
+| Icon | 32, **circle** (`border-radius: 50%`), never a rounded square | 28 |
+| Tab track | canvas `#F2F2F0` pill, padding 4, gap 0 | padding 3 |
+| Tab | height 40, padding 0 16, Button type 600, grey; hover ink | height 34, padding 0 10 |
+| Active tab | accent fill, ink text | same |
+| Brand hover | marker: accent fill behind the name (margin 0 −4, padding 0 4) | same |
+
+- The product icon is a photo or logo, cropped square, shown as a circle. Favicon is the same image cut to a circle with transparent corners.
+- Clicking the brand goes home. If already home, re-render it.
+- The frame below the bar follows **Layout → Frame**.
+
+**How to check:** load both sites in headless Chrome at 1440, 393 and 360. Diff the computed style of bar, brand, icon, track, active tab and idle tab: height, padding, gap, background, shadow, radius, font size, line height, weight, color, top. Everything must match except width. Creator Hub keeps such a script (`navdiff.mjs`). Rerun it after any navbar change.
 
 ### Data pages: tight and clean (`data-ds-profile="compact"`)
 
